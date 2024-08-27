@@ -7,7 +7,6 @@ const rollDice = document.querySelector('.dice');
 
 const player0 = null;
 const player1 = null;
-const riddleNumber = Math.floor(Math.random() * (6 - 1) + 1);
 
 restartBtn.addEventListener('click', () => {
   body.innerHTML = `
@@ -37,6 +36,7 @@ restartBtn.addEventListener('click', () => {
 });
 
 holdBtn.addEventListener('click', () => {
+  const riddleNumber = Math.floor(Math.random() * (6 - 1) + 1);
   switch (riddleNumber) {
     case 2:
       rollDice.src = 'dice2.png';

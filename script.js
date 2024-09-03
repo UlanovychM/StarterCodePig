@@ -4,10 +4,11 @@ const restartBtn = document.querySelector('.btn--new');
 const rollBtn = document.querySelector('.btn--roll');
 const holdBtn = document.querySelector('.btn--hold');
 const rollDice = document.querySelector('.dice');
+const scoreID0 = document.querySelector('#score--0');
+const scoreID1 = document.querySelector('#score--1');
 
-let player0 = 0;
-let player1 = 0;
 let currentNum = 0;
+let activePlayer = 0;
 
 const selectedPlayer = value => document.querySelector(value);
 const rollImg = number => {
@@ -64,19 +65,25 @@ restartBtn.addEventListener('click', () => {
     </main>`;
 });
 
-holdBtn.addEventListener('click', togglePlayer);
-
 rollBtn.addEventListener('click', () => {
   const riddleNumber = Math.floor(Math.random() * (6 - 1) + 1);
-
+  rollImg(riddleNumber);
   if (riddleNumber !== 1) {
-    rollImg(riddleNumber);
-    player0 += riddleNumber;
+    currentNum += riddleNumber;
+    document.getElementById(`current--${activePlayer}`).textContent =
+      currentNum;
   } else {
-    player1 += riddleNumber;
-    rollImg(riddleNumber);
+    currentNum = 0;
+    document.getElementById(`current--${activePlayer}`).textContent =
+      currentNum;
+    activePlayer = activePlayer === 0 ? 1 : 0;
+    togglePlayer();
   }
-
-  console.log(player0);
-  console.log(player1);
+  holdBtn.addEventListener('click', () => {
+    togglePlayer();
+  });
 });
+
+// holdBtn.addEventListener('click', () => {
+//   selectedPlayer('#current--0').textContent = currentNum;
+// });

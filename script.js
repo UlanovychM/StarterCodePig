@@ -16,23 +16,29 @@ let isPlaying = true;
 const selectedPlayer = value => document.querySelector(value);
 const rollImg = number => {
   switch (number) {
+    case 1:
+      rollDice.classList.remove('hidden');
+      rollDice.src = 'dice1.png';
     case 2:
+      rollDice.classList.remove('hidden');
       rollDice.src = 'dice2.png';
       break;
     case 3:
+      rollDice.classList.remove('hidden');
       rollDice.src = 'dice3.png';
       break;
     case 4:
+      rollDice.classList.remove('hidden');
       rollDice.src = 'dice4.png';
       break;
     case 5:
+      rollDice.classList.remove('hidden');
       rollDice.src = 'dice5.png';
       break;
     case 6:
+      rollDice.classList.remove('hidden');
       rollDice.src = 'dice6.png';
       break;
-    default:
-      rollDice.src = 'dice1.png';
   }
 };
 
@@ -68,7 +74,7 @@ restartBtn.addEventListener('click', () => {
         </div>
       </section>
 
-      <img src="dice1.png" alt="Playing dice" class="dice" />
+      <img src="dice1.png" alt="Playing dice" class="dice hidden" />
       <button class="btn btn--new">🐷 Новая игра</button>
       <button class="btn btn--roll">🎲 Бросить кубик</button>
       <button class="btn btn--hold">👌 Оставить</button>
@@ -98,6 +104,7 @@ holdBtn.addEventListener('click', () => {
 
     if (totalScore[activePlayer] >= 20) {
       isPlaying = false;
+      rollDice.classList.add('hidden');
       document
         .getElementById(`player--${activePlayer}`)
         .classList.add('player--winner');

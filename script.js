@@ -6,12 +6,23 @@ const holdBtn = document.querySelector('.btn--hold');
 const rollDice = document.querySelector('.dice');
 const scoreID0 = document.querySelector('#score--0');
 const scoreID1 = document.querySelector('#score--1');
+const currentID0 = document.querySelector('#current--0');
+const currentID1 = document.querySelector('#current--1');
 
-let currentNum = 0;
+let currentNum = null;
 let activePlayer = 0;
-
-const totalScore = [0, 0];
+let totalScore = [0, 0];
 let isPlaying = true;
+
+restartBtn.addEventListener('click', () => {
+  isPlaying = true;
+
+  totalScore = [0, 0];
+  scoreID0.textContent = 0;
+  scoreID1.textContent = 0;
+  currentID0.textContent = 0;
+  currentID1.textContent = 0;
+});
 
 const selectedPlayer = value => document.querySelector(value);
 const rollImg = number => {
@@ -54,33 +65,6 @@ const togglePlayer = () => {
   selectedPlayer('.player--0').classList.toggle('player--active');
 };
 
-restartBtn.addEventListener('click', () => {
-  document.querySelector('body').innerHTML = `
-   <main>
-      <section class="player player--0 player--active">
-        <h2 class="name" id="name--0">Игрок 1</h2>
-        <p class="score" id="score--0">0</p>
-        <div class="current">
-          <p class="current-label">Текущие очки</p>
-          <p class="current-score" id="current--0">0</p>
-        </div>
-      </section>
-      <section class="player player--1">
-        <h2 class="name" id="name--1">Игрок 2</h2>
-        <p class="score" id="score--1">0</p>
-        <div class="current">
-          <p class="current-label">Текущие очки</p>
-          <p class="current-score" id="current--1">0</p>
-        </div>
-      </section>
-
-      <img src="dice1.png" alt="Playing dice" class="dice hidden" />
-      <button class="btn btn--new">🐷 Новая игра</button>
-      <button class="btn btn--roll">🎲 Бросить кубик</button>
-      <button class="btn btn--hold">👌 Оставить</button>
-    </main>`;
-});
-
 rollBtn.addEventListener('click', () => {
   if (isPlaying) {
     const riddleNumber = Math.floor(Math.random() * (6 - 1) + 1);
@@ -94,6 +78,7 @@ rollBtn.addEventListener('click', () => {
       switchActivePlayers();
     }
   }
+  console.log('click');
 });
 
 holdBtn.addEventListener('click', () => {
@@ -115,4 +100,5 @@ holdBtn.addEventListener('click', () => {
       switchActivePlayers();
     }
   }
+  console.log(totalScore);
 });
